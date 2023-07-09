@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^1.0.0",
     "@headlessui/react": "^1.7.15",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
