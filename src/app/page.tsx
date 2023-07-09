@@ -1,13 +1,10 @@
-"use client";
+import { checkSessionAndRedirectIfInvalid } from "@/utils/helper";
 
-import { useStore } from "@/store/useStore";
-
-export default function Home() {
-  const [count, setCount] = useStore((state) => [state.count, state.setCount]);
+export default async function Home() {
+  await checkSessionAndRedirectIfInvalid("/");
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {count}
-      <button onClick={setCount}>Update count</button>
+    <main className="flex h-[91vh] flex-col items-center justify-between p-24">
+      Hello
     </main>
   );
 }
