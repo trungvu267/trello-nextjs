@@ -26,3 +26,56 @@ export function capitalizeFirstLetters(name: string) {
   // Return the modified string
   return capitalizedString;
 }
+
+export const getTodosGroupByStatus = (todoList: Todo[]) => {
+  const columns = todoList.reduce((acc, todo) => {
+    if (!acc.get(todo.status)) {
+      acc.set(todo.status, {
+        id: todo.status,
+        todos: [],
+      });
+    }
+    acc.get(todo.status)!.todos.push({
+      id: todo.id,
+      // $createdAt: todo.$createdAt,
+      title: todo.title,
+      status: todo.status,
+      // NOTE: get the image if it exists on the todo
+      // ...(todo.image && {
+      //   image: JSON.parse(todo.image),
+      // }),
+    });
+    return acc;
+  }, new Map<TypeColumn, Column>());
+  //NOTE: if columns doesn't have inprogress, todo and done, add them with empty array
+  const columnTypes: TypeColumn[] = ["todo", "inprogress", "done"];
+  for (const columnType of columnTypes) {
+    if (!columns.get(columnType)) {
+      columns.set(columnType, {
+        id: columnType,
+        todos: [],
+      });
+    }
+  }
+  //NOTE: Sort coulumns by columnTypes
+  const sortedColumns = new Map(
+    Array.from(columns.entries()).sort(
+      (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
+    )
+  );
+
+  return sortedColumns;
+};
+
+export const getStatusLabel = (name: TypeColumn) => {
+  switch (name) {
+    case "todo":
+      return "To Do 📃";
+    case "inprogress":
+      return "In Progress ✍️";
+    case "done":
+      return "Done 🎉";
+    default:
+      return "Unknown Status";
+  }
+};
