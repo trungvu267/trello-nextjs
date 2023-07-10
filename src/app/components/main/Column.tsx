@@ -26,8 +26,8 @@ const Column = ({ column, droppableId }: ColumnProps) => {
             <div className="text-center text-xl font-bold">
               {getStatusLabel(droppableId)}
             </div>
-            {column.todos.map((item, index) => (
-              <Todo index={index} data={item} key={item.id} />
+            {column.todos.map((todo, index) => (
+              <Todo index={index} todo={todo} key={todo.$id} />
             ))}
             {provided.placeholder}
             <AddNewTodo />

@@ -1,12 +1,17 @@
 "use client";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useTodoList } from "@/store/useTodoList";
+import { useEffect } from "react";
 import Column from "./Column";
+import { BoardSkeleton } from "./Skeleton";
 const Board = () => {
-  const [todoList, setTodoList] = useTodoList((state) => [
+  const [todoList, fetchTodoList] = useTodoList((state) => [
     state.todoList,
-    state.setTodoList,
+    state.fetchTodoList,
   ]);
+  useEffect(() => {
+    fetchTodoList();
+  }, []);
   const handleDragEnd = (result: DropResult) => {
     const { source, destination } = result;
     //NOTE: Check if the draggable item was dropped outside a droppable area
@@ -42,13 +47,14 @@ const Board = () => {
       destinationTodos.splice(destination.index, 0, todo);
     }
   };
-  const todoListArray = Array.from(todoList.values());
+  const todoListGroupByStatusArray = Array.from(todoList.values());
+  if (todoListGroupByStatusArray.length === 0) return <BoardSkeleton />;
 
   return (
     <div className="flex flex-row space-x-24 mt-0">
       <DragDropContext onDragEnd={handleDragEnd}>
-        {todoListArray.map((todo) => (
-          <Column key={todo.id} column={todo} droppableId={todo.id} />
+        {todoListGroupByStatusArray.map((column: any) => (
+          <Column key={column.id} column={column} droppableId={column.id} />
         ))}
       </DragDropContext>
     </div>

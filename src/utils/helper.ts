@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { redirect } from "next/navigation";
-
+import { database } from "@/lib/appwrite";
 export const checkSessionAndRedirectIfInvalid = async (pathName: string) => {
   const session = await getServerSession(authOptions);
 
@@ -27,7 +27,12 @@ export function capitalizeFirstLetters(name: string) {
   return capitalizedString;
 }
 
-export const getTodosGroupByStatus = (todoList: Todo[]) => {
+export const getTodosGroupByStatus = async () => {
+  const data = await database.listDocuments(
+    process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+    process.env.NEXT_PUBLIC_APPWRITE_TODOS_COLLECTION_ID!
+  );
+  const todoList = data.documents;
   const columns = todoList.reduce((acc, todo) => {
     if (!acc.get(todo.status)) {
       acc.set(todo.status, {
@@ -36,8 +41,8 @@ export const getTodosGroupByStatus = (todoList: Todo[]) => {
       });
     }
     acc.get(todo.status)!.todos.push({
-      id: todo.id,
-      // $createdAt: todo.$createdAt,
+      $id: todo.$id,
+      $createdAt: todo.$createdAt,
       title: todo.title,
       status: todo.status,
       // NOTE: get the image if it exists on the todo
