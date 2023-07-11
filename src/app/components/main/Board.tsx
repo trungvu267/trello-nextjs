@@ -1,14 +1,18 @@
 "use client";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useTodoList } from "@/store/useTodoList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Column from "./Column";
 import { BoardSkeleton } from "./Skeleton";
+import CustomConfetti from "./CustomConfetti";
+import { useConfetti } from "@/store/useConfetti";
 const Board = () => {
-  const [todoList, fetchTodoList] = useTodoList((state) => [
+  const [todoList, fetchTodoList, updateTodoInDb] = useTodoList((state) => [
     state.todoList,
     state.fetchTodoList,
+    state.updateTodoInDb,
   ]);
+  const setIsConFetti = useConfetti((state) => state.setIsConFetti);
   useEffect(() => {
     fetchTodoList();
   }, []);
@@ -45,6 +49,10 @@ const Board = () => {
       sourceTodos.splice(source.index, 1);
       todo.status = destination.droppableId as TypeColumn;
       destinationTodos.splice(destination.index, 0, todo);
+      updateTodoInDb(todo, destination.droppableId as TypeColumn);
+      if (destination.droppableId === "done") {
+        setIsConFetti();
+      }
     }
   };
   const todoListGroupByStatusArray = Array.from(todoList.values());
@@ -57,6 +65,7 @@ const Board = () => {
           <Column key={column.id} column={column} droppableId={column.id} />
         ))}
       </DragDropContext>
+      <CustomConfetti />
     </div>
   );
 };
