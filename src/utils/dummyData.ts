@@ -1,27 +1,21 @@
-export const dummyData: Todo[] = [
+export const dummyStatusList: Status[] = [
   {
-    id: "1",
-    title: "hello meow meow",
-    image:
-      "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.jpg",
-    status: "todo",
+    id: "todo",
+    value: "todo",
+    label: "Todo",
+    color: "bg-primary",
   },
   {
-    id: "2",
-    title: "hello meow meow 1",
-    image: null,
-    status: "inprogress",
+    id: "inprogress",
+    value: "inprogress",
+    label: "In Progress",
+    color: "bg-secondary",
   },
   {
-    id: "3",
-    title: "hello meow meow 2",
-    image: null,
-    status: "inprogress",
-  },
-  {
-    id: "4",
-    title: "hello meow meow 3",
-    image: null,
-    status: "done",
+    id: "done",
+    value: "done",
+    label: "Done",
+    color: "bg-success",
   },
 ];
+export const statusList: TypeColumn[] = ["todo", "inprogress", "done"];

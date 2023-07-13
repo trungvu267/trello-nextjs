@@ -1,7 +1,7 @@
 "use client";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useTodoList } from "@/store/useTodoList";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Column from "./Column";
 import { BoardSkeleton } from "./Skeleton";
 import CustomConfetti from "./CustomConfetti";
@@ -59,7 +59,7 @@ const Board = () => {
   if (todoListGroupByStatusArray.length === 0) return <BoardSkeleton />;
 
   return (
-    <div className="flex flex-row space-x-24 mt-0">
+    <div className="flex flex-row space-x-24 ">
       <DragDropContext onDragEnd={handleDragEnd}>
         {todoListGroupByStatusArray.map((column: any) => (
           <Column key={column.id} column={column} droppableId={column.id} />

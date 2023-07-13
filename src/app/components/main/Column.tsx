@@ -5,6 +5,7 @@ import { getStatusLabel } from "@/utils/helper";
 import Todo from "./Todo";
 import { Button } from "react-daisyui";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { useCreateTodoModal, useSetDefaultStatusValue } from "@/store/useModal";
 
 interface ColumnProps {
   column: Column;
@@ -30,7 +31,7 @@ const Column = ({ column, droppableId }: ColumnProps) => {
               <Todo index={index} todo={todo} key={todo.$id} />
             ))}
             {provided.placeholder}
-            <AddNewTodo />
+            <AddNewTodo status={droppableId} />
           </div>
         )}
       </Droppable>
@@ -39,10 +40,20 @@ const Column = ({ column, droppableId }: ColumnProps) => {
 };
 export default Column;
 
-const AddNewTodo = () => {
+const AddNewTodo = ({ status }: { status: TypeColumn }) => {
+  const [setVisible] = useCreateTodoModal((state) => [
+    state.setCreateTodoVisible,
+  ]);
+  const setDefaultValueStatus = useSetDefaultStatusValue(
+    (state) => state.setDefaultStatusValue
+  );
+  const handleOnCLick = () => {
+    setVisible();
+    setDefaultValueStatus(status);
+  };
   return (
     <div className="mx-2">
-      <Button fullWidth>
+      <Button fullWidth onClick={handleOnCLick}>
         <div className="flex space-x-4 items-center flex-row justify-between">
           <div>Add New Todo</div>
           <AiFillPlusCircle size={24} />

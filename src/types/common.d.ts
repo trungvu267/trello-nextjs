@@ -13,6 +13,12 @@ interface Todo extends Models.Document {
   image?: Image;
 }
 
+interface Status {
+  id: string;
+  value: TypeColumn;
+  label: string;
+  color: string;
+}
 interface Image {
   bucketId: string;
   fileId: string;
