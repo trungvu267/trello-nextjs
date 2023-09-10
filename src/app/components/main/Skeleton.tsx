@@ -5,7 +5,7 @@ export const ColumnSkeleton = () => {
 };
 export const BoardSkeleton = () => {
   return (
-    <div className="flex flex-row space-x-24 mt-0">
+    <div className="flex flex-row space-x-24 m-12">
       <ColumnSkeleton />
       <ColumnSkeleton />
       <ColumnSkeleton />

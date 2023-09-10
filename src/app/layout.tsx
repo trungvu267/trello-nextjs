@@ -20,7 +20,8 @@ export default function RootLayout({
       <body className={`${inter.className} overflow-hidden`}>
         <StyledComponentsRegistry>
           {/* <AuthProvider> */}
-          {/* <Navbar /> */}
+
+          <Navbar />
           {children}
           {/* </AuthProvider> */}
         </StyledComponentsRegistry>

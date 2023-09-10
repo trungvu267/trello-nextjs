@@ -6,6 +6,7 @@ import Column from "./Column";
 import { BoardSkeleton } from "./Skeleton";
 import CustomConfetti from "./CustomConfetti";
 import { useConfetti } from "@/store/useConfetti";
+
 const Board = () => {
   const [todoList, fetchTodoList, updateTodoInDb] = useTodoList((state) => [
     state.todoList,
@@ -56,10 +57,11 @@ const Board = () => {
     }
   };
   const todoListGroupByStatusArray = Array.from(todoList.values());
+
   if (todoListGroupByStatusArray.length === 0) return <BoardSkeleton />;
 
   return (
-    <div className="flex flex-row space-x-24 ">
+    <div className="flex flex-row space-x-24 m-12">
       <DragDropContext onDragEnd={handleDragEnd}>
         {todoListGroupByStatusArray.map((column: any) => (
           <Column key={column.id} column={column} droppableId={column.id} />
