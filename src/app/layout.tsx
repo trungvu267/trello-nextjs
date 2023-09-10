@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import AuthProvider from "@/context/AuthContext";
 import Navbar from "./components/Navbar";
+import StyledComponentsRegistry from "@/lib/AntdRegistry";
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Trello clone",
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} overflow-hidden`}>
-        <AuthProvider>
-          <Navbar />
+        <StyledComponentsRegistry>
+          {/* <AuthProvider> */}
+          {/* <Navbar /> */}
           {children}
-        </AuthProvider>
+          {/* </AuthProvider> */}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

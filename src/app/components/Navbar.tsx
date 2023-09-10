@@ -11,7 +11,7 @@ import { signOut, signIn, useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { capitalizeFirstLetters } from "@/utils/helper";
 const Navbar = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   return (
     <DaisyUiNavbar className="bg-primary">
       <div className="flex-1 ">
@@ -19,9 +19,9 @@ const Navbar = () => {
           daisyUI
         </Button>
       </div>
-      <div className="flex-none">
+      {/* <div className="flex-none">
         {session ? <Auth session={session} /> : <Button>Login</Button>}
-      </div>
+      </div> */}
     </DaisyUiNavbar>
   );
 };

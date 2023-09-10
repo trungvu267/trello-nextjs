@@ -14,6 +14,8 @@ import { useClickAway } from "@uidotdev/usehooks";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { useTodoList } from "@/store/useTodoList";
+import { DatePicker } from "antd";
+import type { DatePickerProps } from "antd";
 
 const CreateTodoModal = () => {
   const [visible, setVisible] = useCreateTodoModal((state) => [
@@ -30,6 +32,12 @@ const CreateTodoModal = () => {
   const methods = useForm({
     resolver: yupResolver(createTodoSchema),
   });
+  const onChangeDatePicker: DatePickerProps["onChange"] = (
+    date,
+    dateString
+  ) => {
+    console.log(date, dateString);
+  };
   useEffect(() => {
     methods.setValue("status", defaultStatusValue);
   }, [defaultStatusValue]);
@@ -85,6 +93,7 @@ const CreateTodoModal = () => {
                       onSubmit={onSubmit}
                       className="flex flex-col space-y-4"
                     >
+                      <DatePicker onChange={onChangeDatePicker} picker="date" />
                       <Input type="text" {...methods.register("title")} />
                       <ErrorMessage
                         message={methods?.formState?.errors?.title?.message}
