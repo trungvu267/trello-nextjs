@@ -57,7 +57,7 @@ export default function ({ repo }: any) {
   // await checkSessionAndRedirectIfInvalid("/");
   return (
     <main>
-      {/* <Layout className="h-screen" hasSider>
+      <Layout className="h-screen" hasSider>
         <Sider width={200}>
           <Menu
             mode="inline"
@@ -86,7 +86,7 @@ export default function ({ repo }: any) {
           <Board />
         </Content>
       </Layout>
-      <CreateTodoModal /> */}
+      <CreateTodoModal />
     </main>
   );
 }

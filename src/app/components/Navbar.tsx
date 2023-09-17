@@ -12,6 +12,7 @@ import { capitalizeFirstLetters } from "@/utils/helper";
 // antd
 import { Input } from "antd";
 import { BellOutlined } from "@ant-design/icons";
+import { UserButton } from "@clerk/nextjs";
 
 const { Search } = Input;
 const Navbar = () => {
@@ -34,6 +35,7 @@ const Navbar = () => {
           size="xs"
           // src={session?.user?.image as string}
         />
+        {/* <UserButton /> */}
       </div>
       {/* <div className="flex-none">
         {session ? <Auth session={session} /> : <Button>Login</Button>}

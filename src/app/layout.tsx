@@ -17,18 +17,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} overflow-hidden`}>
-          <StyledComponentsRegistry>
-            {/* <AuthProvider> */}
+    // <ClerkProvider>
+    <html lang="en">
+      <body className={`${inter.className} overflow-hidden`}>
+        <StyledComponentsRegistry>
+          {/* <AuthProvider> */}
 
-            <Navbar />
-            {children}
-            {/* </AuthProvider> */}
-          </StyledComponentsRegistry>
-        </body>
-      </html>
-    </ClerkProvider>
+          <Navbar />
+          {children}
+          {/* </AuthProvider> */}
+        </StyledComponentsRegistry>
+      </body>
+    </html>
+    //  </ClerkProvider>
   );
 }
