@@ -5,6 +5,10 @@ import CreateTodoModal from "./components/CreateTodoModal";
 import { Layout, Menu, Avatar, Dropdown, Space } from "antd";
 const { Header, Content, Footer, Sider } = Layout;
 import { Navbar, Button } from "react-daisyui";
+import { network } from "@/services";
+import { GetServerSideProps, GetStaticProps } from "next";
+import { useEffect } from "react";
+import { workApi } from "@/services/axios";
 const workspace = {
   key: "1",
   label: "Workspaces",
@@ -41,11 +45,19 @@ const boards = {
     },
   ],
 };
-export default async function () {
+
+export default function ({ repo }: any) {
+  const test = async () => {
+    const res = await workApi.get("/");
+    console.log(res);
+  };
+  useEffect(() => {
+    test();
+  });
   // await checkSessionAndRedirectIfInvalid("/");
   return (
     <main>
-      <Layout className="h-screen" hasSider>
+      {/* <Layout className="h-screen" hasSider>
         <Sider width={200}>
           <Menu
             mode="inline"
@@ -74,7 +86,7 @@ export default async function () {
           <Board />
         </Content>
       </Layout>
-      <CreateTodoModal />
+      <CreateTodoModal /> */}
     </main>
   );
 }
